@@ -1,0 +1,25 @@
+﻿name: "NGO - Backport Verification"
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - develop-2.0.0
+
+jobs:
+  backport-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check PR description
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = pr.body || '';
+
+            if (!body.includes('## Backports')) {
+              core.setFailed('PR description must include a "## Backports" section. Please add this section and provide appropriate information or explain why backports are not needed.');
+            }
