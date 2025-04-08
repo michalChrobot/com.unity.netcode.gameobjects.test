@@ -20,6 +20,6 @@ jobs:
             const pr = context.payload.pull_request;
             const body = pr.body || '';
 
-            if (!body.includes('## Backports')) {
-              core.setFailed('PR description must include a "## Backports" section. Please add this section and provide appropriate information or explain why backports are not needed.');
+            if (!body.includes('## Backport')) {
+              core.setFailed('PR description must include a "## Backport" section. Please add this section and provide information about this PR backport to develop or develop-2.0.0 branch or explain why backport is not needed.');
             }
